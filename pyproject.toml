@@ -1,0 +1,27 @@
+[project]
+name = "reachy-mini-vision-agent"
+version = "0.1.0"
+description = "Reachy Mini robot agent with local vision, voice, and robot control"
+requires-python = ">=3.10"
+
+dependencies = [
+  "python-dotenv>=1.0",
+  "vision-agents[local]",
+  "vision-agents-plugins-gemini",
+  "vision-agents-plugins-assemblyai",
+  "vision-agents-plugins-cartesia",
+  "reachy-mini",
+  "sounddevice>=0.5.0",
+]
+
+[tool.uv.sources]
+"vision-agents" = {path = "../vision-agents-stream/agents-core", editable = true}
+"vision-agents-plugins-gemini" = {path = "../vision-agents-stream/plugins/gemini", editable = true}
+"vision-agents-plugins-assemblyai" = {path = "../vision-agents-stream/plugins/assemblyai", editable = true}
+"vision-agents-plugins-cartesia" = {path = "../vision-agents-stream/plugins/cartesia", editable = true}
+
+[tool.uv]
+environments = ["sys_platform == 'darwin'"]
+dependency-metadata = [
+  { name = "gstreamer-libs", version = "1.28.1", requires-dist = ["setuptools>=80.9.0"] },
+]
