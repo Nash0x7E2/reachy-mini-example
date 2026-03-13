@@ -427,7 +427,7 @@ wheels = [
 
 [[package]]
 name = "getstream"
-version = "2.7.1"
+version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dataclasses-json", marker = "sys_platform == 'darwin'" },
@@ -442,9 +442,9 @@ dependencies = [
     { name = "python-dateutil", marker = "sys_platform == 'darwin'" },
     { name = "twirp", marker = "sys_platform == 'darwin'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1b/8f/4a9eba635964894bb373dc7ad90370720be37c2da16ff1c3578fea057d61/getstream-2.7.1.tar.gz", hash = "sha256:cf78bb0c52ed732e447ee59446ce1e3b999e146886ad73cbf799e2dcbe8d01ed", size = 445595, upload-time = "2026-01-30T17:40:17.486Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3e/40/bb8c34c961e28766ee225589bf5e7a8d2d97db770a4b23abd09021965e45/getstream-3.0.0.tar.gz", hash = "sha256:4303b425242eb59c2eb2fc59fedac37ed8a8298d2c0f180106e8e2fd13aa4865", size = 467519, upload-time = "2026-03-05T17:35:41.317Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/ad/a71eeb8c6dda09eb93f0e1f41d331a9a1d9f867b296996a3b8b0b7bfda8f/getstream-2.7.1-py3-none-any.whl", hash = "sha256:7465eb344b0f1f422088f259b593b460dc3bc88150c2ade1f1497bb4a3ee1457", size = 275293, upload-time = "2026-01-30T17:40:18.563Z" },
+    { url = "https://files.pythonhosted.org/packages/2a/d2/82aa52ceef7e5d3ad6871ccb01a65c695654c264db43b2f909ddb51724d0/getstream-3.0.0-py3-none-any.whl", hash = "sha256:5badbb929ec90121155b05625756f97855a058745a4695a9041878d9e2b86c8f", size = 294037, upload-time = "2026-03-05T17:35:39.998Z" },
 ]
 
 [package.optional-dependencies]
@@ -1202,26 +1202,20 @@ wheels = [
 
 [[package]]
 name = "pillow"
-version = "12.1.1"
+version = "10.4.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/1f/42/5c74462b4fd957fcd7b13b04fb3205ff8349236ea74c7c375766d6c82288/pillow-12.1.1.tar.gz", hash = "sha256:9ad8fa5937ab05218e2b6a4cff30295ad35afd2f83ac592e68c0d871bb0fdbc4", size = 46980264, upload-time = "2026-02-11T04:23:07.146Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cd/74/ad3d526f3bf7b6d3f408b73fde271ec69dfac8b81341a318ce825f2b3812/pillow-10.4.0.tar.gz", hash = "sha256:166c1cd4d24309b30d61f79f4a9114b7b2313d7450912277855ff5dfd7cd4a06", size = 46555059, upload-time = "2024-07-01T09:48:43.583Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1d/30/5bd3d794762481f8c8ae9c80e7b76ecea73b916959eb587521358ef0b2f9/pillow-12.1.1-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:1f1625b72740fdda5d77b4def688eb8fd6490975d06b909fd19f13f391e077e0", size = 5304099, upload-time = "2026-02-11T04:20:06.13Z" },
-    { url = "https://files.pythonhosted.org/packages/bd/c1/aab9e8f3eeb4490180e357955e15c2ef74b31f64790ff356c06fb6cf6d84/pillow-12.1.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:178aa072084bd88ec759052feca8e56cbb14a60b39322b99a049e58090479713", size = 4657880, upload-time = "2026-02-11T04:20:09.291Z" },
-    { url = "https://files.pythonhosted.org/packages/2b/46/5da1ec4a5171ee7bf1a0efa064aba70ba3d6e0788ce3f5acd1375d23c8c0/pillow-12.1.1-cp311-cp311-macosx_10_10_x86_64.whl", hash = "sha256:e879bb6cd5c73848ef3b2b48b8af9ff08c5b71ecda8048b7dd22d8a33f60be32", size = 5304084, upload-time = "2026-02-11T04:20:27.501Z" },
-    { url = "https://files.pythonhosted.org/packages/78/93/a29e9bc02d1cf557a834da780ceccd54e02421627200696fcf805ebdc3fb/pillow-12.1.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:365b10bb9417dd4498c0e3b128018c4a624dc11c7b97d8cc54effe3b096f4c38", size = 4657866, upload-time = "2026-02-11T04:20:29.827Z" },
-    { url = "https://files.pythonhosted.org/packages/07/d3/8df65da0d4df36b094351dce696f2989bec731d4f10e743b1c5f4da4d3bf/pillow-12.1.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:ab323b787d6e18b3d91a72fc99b1a2c28651e4358749842b8f8dfacd28ef2052", size = 5262803, upload-time = "2026-02-11T04:20:47.653Z" },
-    { url = "https://files.pythonhosted.org/packages/d6/71/5026395b290ff404b836e636f51d7297e6c83beceaa87c592718747e670f/pillow-12.1.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:adebb5bee0f0af4909c30db0d890c773d1a92ffe83da908e2e9e720f8edf3984", size = 4657601, upload-time = "2026-02-11T04:20:49.328Z" },
-    { url = "https://files.pythonhosted.org/packages/14/a1/16c4b823838ba4c9c52c0e6bbda903a3fe5a1bdbf1b8eb4fff7156f3e318/pillow-12.1.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:6c6db3b84c87d48d0088943bf33440e0c42370b99b1c2a7989216f7b42eede60", size = 5262561, upload-time = "2026-02-11T04:21:11.742Z" },
-    { url = "https://files.pythonhosted.org/packages/bb/ad/ad9dc98ff24f485008aa5cdedaf1a219876f6f6c42a4626c08bc4e80b120/pillow-12.1.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:8b7e5304e34942bf62e15184219a7b5ad4ff7f3bb5cca4d984f37df1a0e1aee2", size = 4657460, upload-time = "2026-02-11T04:21:13.786Z" },
-    { url = "https://files.pythonhosted.org/packages/19/2a/b9d62794fc8a0dd14c1943df68347badbd5511103e0d04c035ffe5cf2255/pillow-12.1.1-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:0330d233c1a0ead844fc097a7d16c0abff4c12e856c0b325f231820fee1f39da", size = 5264880, upload-time = "2026-02-11T04:21:32.865Z" },
-    { url = "https://files.pythonhosted.org/packages/26/9d/e03d857d1347fa5ed9247e123fcd2a97b6220e15e9cb73ca0a8d91702c6e/pillow-12.1.1-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:5dae5f21afb91322f2ff791895ddd8889e5e947ff59f71b46041c8ce6db790bc", size = 4660616, upload-time = "2026-02-11T04:21:34.97Z" },
-    { url = "https://files.pythonhosted.org/packages/59/04/dc5c3f297510ba9a6837cbb318b87dd2b8f73eb41a43cc63767f65cb599c/pillow-12.1.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:2815a87ab27848db0321fb78c7f0b2c8649dee134b7f2b80c6a45c6831d75ccd", size = 5266254, upload-time = "2026-02-11T04:22:07.656Z" },
-    { url = "https://files.pythonhosted.org/packages/05/30/5db1236b0d6313f03ebf97f5e17cda9ca060f524b2fcc875149a8360b21c/pillow-12.1.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:f7ed2c6543bad5a7d5530eb9e78c53132f93dfa44a28492db88b41cdab885202", size = 4657499, upload-time = "2026-02-11T04:22:09.613Z" },
-    { url = "https://files.pythonhosted.org/packages/6c/9d/efd18493f9de13b87ede7c47e69184b9e859e4427225ea962e32e56a49bc/pillow-12.1.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:1f90cff8aa76835cba5769f0b3121a22bd4eb9e6884cfe338216e557a9a548b8", size = 5268612, upload-time = "2026-02-11T04:22:29.884Z" },
-    { url = "https://files.pythonhosted.org/packages/f8/f1/4f42eb2b388eb2ffc660dcb7f7b556c1015c53ebd5f7f754965ef997585b/pillow-12.1.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:1f1be78ce9466a7ee64bfda57bdba0f7cc499d9794d518b854816c41bf0aa4e9", size = 4660567, upload-time = "2026-02-11T04:22:31.799Z" },
-    { url = "https://files.pythonhosted.org/packages/56/11/5d43209aa4cb58e0cc80127956ff1796a68b928e6324bbf06ef4db34367b/pillow-12.1.1-pp311-pypy311_pp73-macosx_10_15_x86_64.whl", hash = "sha256:600fd103672b925fe62ed08e0d874ea34d692474df6f4bf7ebe148b30f89f39f", size = 5228606, upload-time = "2026-02-11T04:22:52.106Z" },
-    { url = "https://files.pythonhosted.org/packages/5f/d5/3b005b4e4fda6698b371fa6c21b097d4707585d7db99e98d9b0b87ac612a/pillow-12.1.1-pp311-pypy311_pp73-macosx_11_0_arm64.whl", hash = "sha256:665e1b916b043cef294bc54d47bf02d87e13f769bc4bc5fa225a24b3a6c5aca9", size = 4622321, upload-time = "2026-02-11T04:22:53.827Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/69/a31cccd538ca0b5272be2a38347f8839b97a14be104ea08b0db92f749c74/pillow-10.4.0-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:4d9667937cfa347525b319ae34375c37b9ee6b525440f3ef48542fcf66f2731e", size = 3509271, upload-time = "2024-07-01T09:45:22.07Z" },
+    { url = "https://files.pythonhosted.org/packages/9a/9e/4143b907be8ea0bce215f2ae4f7480027473f8b61fcedfda9d851082a5d2/pillow-10.4.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:543f3dc61c18dafb755773efc89aae60d06b6596a63914107f75459cf984164d", size = 3375658, upload-time = "2024-07-01T09:45:25.292Z" },
+    { url = "https://files.pythonhosted.org/packages/a7/62/c9449f9c3043c37f73e7487ec4ef0c03eb9c9afc91a92b977a67b3c0bbc5/pillow-10.4.0-cp311-cp311-macosx_10_10_x86_64.whl", hash = "sha256:0a9ec697746f268507404647e531e92889890a087e03681a3606d9b920fbee3c", size = 3509265, upload-time = "2024-07-01T09:45:49.812Z" },
+    { url = "https://files.pythonhosted.org/packages/f4/5f/491dafc7bbf5a3cc1845dc0430872e8096eb9e2b6f8161509d124594ec2d/pillow-10.4.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:dfe91cb65544a1321e631e696759491ae04a2ea11d36715eca01ce07284738be", size = 3375655, upload-time = "2024-07-01T09:45:52.462Z" },
+    { url = "https://files.pythonhosted.org/packages/05/cb/0353013dc30c02a8be34eb91d25e4e4cf594b59e5a55ea1128fde1e5f8ea/pillow-10.4.0-cp312-cp312-macosx_10_10_x86_64.whl", hash = "sha256:673655af3eadf4df6b5457033f086e90299fdd7a47983a13827acf7459c15d94", size = 3509350, upload-time = "2024-07-01T09:46:17.177Z" },
+    { url = "https://files.pythonhosted.org/packages/e7/cf/5c558a0f247e0bf9cec92bff9b46ae6474dd736f6d906315e60e4075f737/pillow-10.4.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:866b6942a92f56300012f5fbac71f2d610312ee65e22f1aa2609e491284e5597", size = 3374980, upload-time = "2024-07-01T09:46:19.169Z" },
+    { url = "https://files.pythonhosted.org/packages/c3/00/706cebe7c2c12a6318aabe5d354836f54adff7156fd9e1bd6c89f4ba0e98/pillow-10.4.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:8bc1a764ed8c957a2e9cacf97c8b2b053b70307cf2996aafd70e91a082e70df3", size = 3525685, upload-time = "2024-07-01T09:46:45.194Z" },
+    { url = "https://files.pythonhosted.org/packages/cf/76/f658cbfa49405e5ecbfb9ba42d07074ad9792031267e782d409fd8fe7c69/pillow-10.4.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:6209bb41dc692ddfee4942517c19ee81b86c864b626dbfca272ec0f7cff5d9fb", size = 3374883, upload-time = "2024-07-01T09:46:47.331Z" },
+    { url = "https://files.pythonhosted.org/packages/38/30/095d4f55f3a053392f75e2eae45eba3228452783bab3d9a920b951ac495c/pillow-10.4.0-pp310-pypy310_pp73-macosx_10_15_x86_64.whl", hash = "sha256:5b4815f2e65b30f5fbae9dfffa8636d992d49705723fe86a3661806e069352d4", size = 3493889, upload-time = "2024-07-01T09:48:04.815Z" },
+    { url = "https://files.pythonhosted.org/packages/f3/e8/4ff79788803a5fcd5dc35efdc9386af153569853767bff74540725b45863/pillow-10.4.0-pp310-pypy310_pp73-macosx_11_0_arm64.whl", hash = "sha256:8f0aef4ef59694b12cadee839e2ba6afeab89c0f39a3adc02ed51d109117b8da", size = 3346160, upload-time = "2024-07-01T09:48:07.206Z" },
 ]
 
 [[package]]
@@ -1743,10 +1737,10 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.0" },
     { name = "reachy-mini" },
     { name = "sounddevice", specifier = ">=0.5.0" },
-    { name = "vision-agents", extras = ["local"], editable = "../vision-agents-stream/agents-core" },
-    { name = "vision-agents-plugins-assemblyai", editable = "../vision-agents-stream/plugins/assemblyai" },
-    { name = "vision-agents-plugins-cartesia", editable = "../vision-agents-stream/plugins/cartesia" },
-    { name = "vision-agents-plugins-gemini", editable = "../vision-agents-stream/plugins/gemini" },
+    { name = "vision-agents", extras = ["local"], git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=agents-core&branch=local" },
+    { name = "vision-agents-plugins-assemblyai", git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=plugins%2Fassemblyai&branch=local" },
+    { name = "vision-agents-plugins-cartesia", git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=plugins%2Fcartesia&branch=local" },
+    { name = "vision-agents-plugins-gemini", git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=plugins%2Fgemini&branch=local" },
 ]
 
 [[package]]
@@ -2199,7 +2193,8 @@ wheels = [
 
 [[package]]
 name = "vision-agents"
-source = { editable = "../vision-agents-stream/agents-core" }
+version = "0.4.4.dev17+gfcc3776ff"
+source = { git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=agents-core&branch=local#fcc3776ffaf0a0b117eb77e09c64306ab197a886" }
 dependencies = [
     { name = "colorlog", marker = "sys_platform == 'darwin'" },
     { name = "fastapi", marker = "sys_platform == 'darwin'" },
@@ -2218,155 +2213,31 @@ local = [
     { name = "sounddevice", marker = "sys_platform == 'darwin'" },
 ]
 
-[package.metadata]
-requires-dist = [
-    { name = "click", marker = "extra == 'dev'" },
-    { name = "colorlog", specifier = ">=6.10.1" },
-    { name = "fastapi", specifier = ">=0.128.0" },
-    { name = "getstream", extras = ["telemetry", "webrtc"], specifier = ">=2.5.16,<3" },
-    { name = "mcp", specifier = ">=1.23.3" },
-    { name = "mypy", marker = "extra == 'dev'" },
-    { name = "numpy", specifier = ">=1.24.0" },
-    { name = "onnxruntime", specifier = ">=1.16.1" },
-    { name = "pillow", specifier = ">=10.4.0" },
-    { name = "pytest", marker = "extra == 'dev'" },
-    { name = "python-dotenv", specifier = ">=1.1.1" },
-    { name = "redis", extras = ["hiredis"], marker = "extra == 'redis'", specifier = ">=5.0.0" },
-    { name = "ruff", marker = "extra == 'dev'" },
-    { name = "sounddevice", marker = "extra == 'local'", specifier = ">=0.5.0" },
-    { name = "urllib3", specifier = ">=2.6.3" },
-    { name = "uvicorn", specifier = ">=0.38.0" },
-    { name = "vision-agents-plugins-anthropic", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/anthropic" },
-    { name = "vision-agents-plugins-anthropic", marker = "extra == 'anthropic'", editable = "../vision-agents-stream/plugins/anthropic" },
-    { name = "vision-agents-plugins-assemblyai", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/assemblyai" },
-    { name = "vision-agents-plugins-assemblyai", marker = "extra == 'assemblyai'", editable = "../vision-agents-stream/plugins/assemblyai" },
-    { name = "vision-agents-plugins-aws", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/aws" },
-    { name = "vision-agents-plugins-aws", marker = "extra == 'aws'", editable = "../vision-agents-stream/plugins/aws" },
-    { name = "vision-agents-plugins-cartesia", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/cartesia" },
-    { name = "vision-agents-plugins-cartesia", marker = "extra == 'cartesia'", editable = "../vision-agents-stream/plugins/cartesia" },
-    { name = "vision-agents-plugins-decart", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/decart" },
-    { name = "vision-agents-plugins-decart", marker = "extra == 'decart'", editable = "../vision-agents-stream/plugins/decart" },
-    { name = "vision-agents-plugins-deepgram", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/deepgram" },
-    { name = "vision-agents-plugins-deepgram", marker = "extra == 'deepgram'", editable = "../vision-agents-stream/plugins/deepgram" },
-    { name = "vision-agents-plugins-elevenlabs", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/elevenlabs" },
-    { name = "vision-agents-plugins-elevenlabs", marker = "extra == 'elevenlabs'", editable = "../vision-agents-stream/plugins/elevenlabs" },
-    { name = "vision-agents-plugins-fast-whisper", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/fast_whisper" },
-    { name = "vision-agents-plugins-fast-whisper", marker = "extra == 'fast-whisper'", editable = "../vision-agents-stream/plugins/fast_whisper" },
-    { name = "vision-agents-plugins-fish", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/fish" },
-    { name = "vision-agents-plugins-fish", marker = "extra == 'fish'", editable = "../vision-agents-stream/plugins/fish" },
-    { name = "vision-agents-plugins-gemini", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/gemini" },
-    { name = "vision-agents-plugins-gemini", marker = "extra == 'gemini'", editable = "../vision-agents-stream/plugins/gemini" },
-    { name = "vision-agents-plugins-getstream", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/getstream" },
-    { name = "vision-agents-plugins-getstream", marker = "extra == 'getstream'", editable = "../vision-agents-stream/plugins/getstream" },
-    { name = "vision-agents-plugins-heygen", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/heygen" },
-    { name = "vision-agents-plugins-heygen", marker = "extra == 'heygen'", editable = "../vision-agents-stream/plugins/heygen" },
-    { name = "vision-agents-plugins-huggingface", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/huggingface" },
-    { name = "vision-agents-plugins-huggingface", marker = "extra == 'huggingface'", editable = "../vision-agents-stream/plugins/huggingface" },
-    { name = "vision-agents-plugins-inworld", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/inworld" },
-    { name = "vision-agents-plugins-inworld", marker = "extra == 'inworld'", editable = "../vision-agents-stream/plugins/inworld" },
-    { name = "vision-agents-plugins-kokoro", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/kokoro" },
-    { name = "vision-agents-plugins-kokoro", marker = "extra == 'kokoro'", editable = "../vision-agents-stream/plugins/kokoro" },
-    { name = "vision-agents-plugins-lemonslice", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/lemonslice" },
-    { name = "vision-agents-plugins-lemonslice", marker = "extra == 'lemonslice'", editable = "../vision-agents-stream/plugins/lemonslice" },
-    { name = "vision-agents-plugins-mistral", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/mistral" },
-    { name = "vision-agents-plugins-mistral", marker = "extra == 'mistral'", editable = "../vision-agents-stream/plugins/mistral" },
-    { name = "vision-agents-plugins-moondream", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/moondream" },
-    { name = "vision-agents-plugins-moondream", marker = "extra == 'moondream'", editable = "../vision-agents-stream/plugins/moondream" },
-    { name = "vision-agents-plugins-moonshine", marker = "extra == 'all-plugins'" },
-    { name = "vision-agents-plugins-moonshine", marker = "extra == 'moonshine'" },
-    { name = "vision-agents-plugins-nvidia", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/nvidia" },
-    { name = "vision-agents-plugins-nvidia", marker = "extra == 'nvidia'", editable = "../vision-agents-stream/plugins/nvidia" },
-    { name = "vision-agents-plugins-openai", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/openai" },
-    { name = "vision-agents-plugins-openai", marker = "extra == 'openai'", editable = "../vision-agents-stream/plugins/openai" },
-    { name = "vision-agents-plugins-openrouter", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/openrouter" },
-    { name = "vision-agents-plugins-openrouter", marker = "extra == 'openrouter'", editable = "../vision-agents-stream/plugins/openrouter" },
-    { name = "vision-agents-plugins-pocket", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/pocket" },
-    { name = "vision-agents-plugins-pocket", marker = "extra == 'pocket'", editable = "../vision-agents-stream/plugins/pocket" },
-    { name = "vision-agents-plugins-qwen", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/qwen" },
-    { name = "vision-agents-plugins-qwen", marker = "extra == 'qwen'", editable = "../vision-agents-stream/plugins/qwen" },
-    { name = "vision-agents-plugins-roboflow", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/roboflow" },
-    { name = "vision-agents-plugins-roboflow", marker = "extra == 'roboflow'", editable = "../vision-agents-stream/plugins/roboflow" },
-    { name = "vision-agents-plugins-smart-turn", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/smart_turn" },
-    { name = "vision-agents-plugins-smart-turn", marker = "extra == 'smart-turn'", editable = "../vision-agents-stream/plugins/smart_turn" },
-    { name = "vision-agents-plugins-turbopuffer", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/turbopuffer" },
-    { name = "vision-agents-plugins-turbopuffer", marker = "extra == 'turbopuffer'", editable = "../vision-agents-stream/plugins/turbopuffer" },
-    { name = "vision-agents-plugins-twilio", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/twilio" },
-    { name = "vision-agents-plugins-twilio", marker = "extra == 'twilio'", editable = "../vision-agents-stream/plugins/twilio" },
-    { name = "vision-agents-plugins-ultralytics", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/ultralytics" },
-    { name = "vision-agents-plugins-ultralytics", marker = "extra == 'ultralytics'", editable = "../vision-agents-stream/plugins/ultralytics" },
-    { name = "vision-agents-plugins-vogent", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/vogent" },
-    { name = "vision-agents-plugins-vogent", marker = "extra == 'vogent'", editable = "../vision-agents-stream/plugins/vogent" },
-    { name = "vision-agents-plugins-wizper", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/wizper" },
-    { name = "vision-agents-plugins-wizper", marker = "extra == 'wizper'", editable = "../vision-agents-stream/plugins/wizper" },
-    { name = "vision-agents-plugins-xai", marker = "extra == 'all-plugins'", editable = "../vision-agents-stream/plugins/xai" },
-    { name = "vision-agents-plugins-xai", marker = "extra == 'xai'", editable = "../vision-agents-stream/plugins/xai" },
-]
-provides-extras = ["all-plugins", "anthropic", "assemblyai", "aws", "cartesia", "decart", "deepgram", "dev", "elevenlabs", "fast-whisper", "fish", "gemini", "getstream", "heygen", "huggingface", "inworld", "kokoro", "lemonslice", "local", "mistral", "moondream", "moonshine", "nvidia", "openai", "openrouter", "pocket", "qwen", "redis", "roboflow", "smart-turn", "turbopuffer", "twilio", "ultralytics", "vogent", "wizper", "xai"]
-
 [[package]]
 name = "vision-agents-plugins-assemblyai"
-source = { editable = "../vision-agents-stream/plugins/assemblyai" }
+version = "0.4.4.dev17+gfcc3776ff"
+source = { git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=plugins%2Fassemblyai&branch=local#fcc3776ffaf0a0b117eb77e09c64306ab197a886" }
 dependencies = [
     { name = "aiohttp", marker = "sys_platform == 'darwin'" },
     { name = "vision-agents", marker = "sys_platform == 'darwin'" },
 ]
 
-[package.metadata]
-requires-dist = [
-    { name = "aiohttp", specifier = ">=3.9.0" },
-    { name = "vision-agents", editable = "../vision-agents-stream/agents-core" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.4.1" },
-    { name = "pytest-asyncio", specifier = ">=1.0.0" },
-    { name = "scipy", specifier = ">=1.15.3,<1.16" },
-    { name = "soundfile", specifier = ">=0.13.1" },
-    { name = "torchvision", specifier = ">=0.20.0" },
-]
-
 [[package]]
 name = "vision-agents-plugins-cartesia"
-source = { editable = "../vision-agents-stream/plugins/cartesia" }
+version = "0.4.4.dev17+gfcc3776ff"
+source = { git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=plugins%2Fcartesia&branch=local#fcc3776ffaf0a0b117eb77e09c64306ab197a886" }
 dependencies = [
     { name = "cartesia", marker = "sys_platform == 'darwin'" },
     { name = "vision-agents", marker = "sys_platform == 'darwin'" },
 ]
 
-[package.metadata]
-requires-dist = [
-    { name = "cartesia", specifier = ">=3.0.0,<3.1" },
-    { name = "vision-agents", editable = "../vision-agents-stream/agents-core" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.4.1" },
-    { name = "pytest-asyncio", specifier = ">=1.0.0" },
-]
-
 [[package]]
 name = "vision-agents-plugins-gemini"
-source = { editable = "../vision-agents-stream/plugins/gemini" }
+version = "0.4.4.dev17+gfcc3776ff"
+source = { git = "https://github.com/GetStream/Vision-Agents.git?subdirectory=plugins%2Fgemini&branch=local#fcc3776ffaf0a0b117eb77e09c64306ab197a886" }
 dependencies = [
     { name = "google-genai", marker = "sys_platform == 'darwin'" },
-    { name = "numpy", marker = "sys_platform == 'darwin'" },
     { name = "vision-agents", marker = "sys_platform == 'darwin'" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "google-genai", specifier = ">=1.59.0" },
-    { name = "numpy", specifier = ">=2.2.6" },
-    { name = "vision-agents", editable = "../vision-agents-stream/agents-core" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.4.1" },
-    { name = "pytest-asyncio", specifier = ">=1.0.0" },
-    { name = "python-dotenv", specifier = ">=1.1.1" },
 ]
 
 [[package]]

@@ -15,10 +15,10 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-"vision-agents" = {path = "../vision-agents-stream/agents-core", editable = true}
-"vision-agents-plugins-gemini" = {path = "../vision-agents-stream/plugins/gemini", editable = true}
-"vision-agents-plugins-assemblyai" = {path = "../vision-agents-stream/plugins/assemblyai", editable = true}
-"vision-agents-plugins-cartesia" = {path = "../vision-agents-stream/plugins/cartesia", editable = true}
+"vision-agents" = {git = "https://github.com/GetStream/Vision-Agents.git", branch = "local", subdirectory = "agents-core"}
+"vision-agents-plugins-gemini" = {git = "https://github.com/GetStream/Vision-Agents.git", branch = "local", subdirectory = "plugins/gemini"}
+"vision-agents-plugins-assemblyai" = {git = "https://github.com/GetStream/Vision-Agents.git", branch = "local", subdirectory = "plugins/assemblyai"}
+"vision-agents-plugins-cartesia" = {git = "https://github.com/GetStream/Vision-Agents.git", branch = "local", subdirectory = "plugins/cartesia"}
 
 [tool.uv]
 environments = ["sys_platform == 'darwin'"]
