@@ -21,7 +21,6 @@ dependencies = [
 "vision-agents-plugins-cartesia" = {git = "https://github.com/GetStream/Vision-Agents.git", branch = "local", subdirectory = "plugins/cartesia"}
 
 [tool.uv]
-environments = ["sys_platform == 'darwin'"]
 dependency-metadata = [
   { name = "gstreamer-libs", version = "1.28.1", requires-dist = ["setuptools>=80.9.0"] },
 ]

@@ -125,7 +125,15 @@ def _rpy_to_pose(roll_deg: float, pitch_deg: float, yaw_deg: float) -> np.ndarra
         [0,       0,                      0,                      1],
     ], dtype=np.float64)
 
-EMOTION_ACTIONS: set[str] = {"happy", "sad", "surprised", "angry", "confused", "thinking"}
+EMOTION_TO_MOVE: dict[str, str] = {
+    "happy": "cheerful1",
+    "sad": "sad1",
+    "surprised": "surprised1",
+    "angry": "furious1",
+    "confused": "confused1",
+    "thinking": "thoughtful1",
+}
+EMOTION_ACTIONS: set[str] = set(EMOTION_TO_MOVE)
 
 
 class ReachyController:
@@ -261,10 +269,11 @@ class ReachyController:
         """Play a recorded emotion on the robot."""
         if self._mini is None or self._moves is None:
             return
-        move = self._moves.get(emotion)
-        if move is None:
-            logger.warning("Unknown emotion action: %s", emotion)
+        move_name = EMOTION_TO_MOVE.get(emotion)
+        if move_name is None:
+            logger.warning("No move mapping for emotion: %s", emotion)
             return
+        move = self._moves.get(move_name)
         await asyncio.to_thread(self._mini.play_move, move, initial_goto_duration=0.5)
 
     async def _move_head(self, action: str):
