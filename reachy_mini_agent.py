@@ -9,6 +9,7 @@ Usage:
     uv run python reachy_mini_agent.py
 """
 
+import argparse
 import asyncio
 import logging
 import math
@@ -28,7 +29,7 @@ from vision_agents.core.edge.local_devices import (
     select_audio_devices,
     select_video_device,
 )
-from vision_agents.core.edge.local_transport import LocalTransport
+from vision_agents.core.edge.local_transport import AudioInput, AudioOutput, LocalTransport
 from vision_agents.core.llm.events import LLMResponseCompletedEvent
 from vision_agents.core.tts.tts import TTS
 from vision_agents.plugins import assemblyai, cartesia, gemini
@@ -96,15 +97,33 @@ class ActionStrippingTTS(TTS):
         await self._inner.stop_audio()
 
 
-HEAD_ACTIONS: dict[str, tuple[float, float, float, float, float, float]] = {
-    "nod": (0, 0, 0, 0, -20, 0),
-    "shake": (0, 0, 0, 0, 0, 30),
-    "look_left": (0, 0, 0, 0, 0, -30),
-    "look_right": (0, 0, 0, 0, 0, 30),
-    "look_up": (0, 0, 0, 0, -25, 0),
-    "look_down": (0, 0, 0, 0, 25, 0),
-    "curious": (0, 0, 0, 15, -10, 15),
+HEAD_ACTIONS: dict[str, tuple[float, float, float]] = {
+    "nod": (0, -20, 0),
+    "shake": (0, 0, 30),
+    "look_left": (0, 0, -30),
+    "look_right": (0, 0, 30),
+    "look_up": (-25, 0, 0),
+    "look_down": (25, 0, 0),
+    "curious": (15, -10, 15),
 }
+
+
+def _rpy_to_pose(roll_deg: float, pitch_deg: float, yaw_deg: float) -> np.ndarray:
+    """Build a 4x4 pose matrix from roll/pitch/yaw in degrees."""
+    r = math.radians(roll_deg)
+    p = math.radians(pitch_deg)
+    y = math.radians(yaw_deg)
+
+    cr, sr = math.cos(r), math.sin(r)
+    cp, sp = math.cos(p), math.sin(p)
+    cy, sy = math.cos(y), math.sin(y)
+
+    return np.array([
+        [cy * cp, cy * sp * sr - sy * cr, cy * sp * cr + sy * sr, 0],
+        [sy * cp, sy * sp * sr + cy * cr, sy * sp * cr - cy * sr, 0],
+        [-sp,     cp * sr,                cp * cr,                0],
+        [0,       0,                      0,                      1],
+    ], dtype=np.float64)
 
 EMOTION_ACTIONS: set[str] = {"happy", "sad", "surprised", "angry", "confused", "thinking"}
 
@@ -112,7 +131,8 @@ EMOTION_ACTIONS: set[str] = {"happy", "sad", "surprised", "angry", "confused", "
 class ReachyController:
     """Manages connection to the Reachy Mini robot and dispatches actions."""
 
-    def __init__(self):
+    def __init__(self, host: Optional[str] = None):
+        self._host = host
         self._mini = None
         self._moves = None
         self._action_queue: asyncio.Queue[str] = asyncio.Queue()
@@ -127,7 +147,11 @@ class ReachyController:
             from reachy_mini import ReachyMini
             from reachy_mini.motion.recorded_move import RecordedMoves
 
-            self._mini = ReachyMini()
+            kwargs = {}
+            if self._host is not None:
+                kwargs["host"] = self._host
+                kwargs["connection_mode"] = "network"
+            self._mini = ReachyMini(**kwargs)
             await asyncio.to_thread(self._mini.__enter__)
 
             self._moves = RecordedMoves("pollen-robotics/reachy-mini-emotions-library")
@@ -225,12 +249,11 @@ class ReachyController:
         if self._mini is None:
             return
 
-        pitch = 3.0 * math.sin(self._idle_phase)
-        antenna = 5.0 * math.sin(self._idle_phase * 0.7)
+        pitch_deg = 3.0 * math.sin(self._idle_phase)
+        antenna_rad = math.radians(5.0 * math.sin(self._idle_phase * 0.7))
         self._mini.set_target(
-            pitch=pitch,
-            right_antenna=antenna,
-            left_antenna=-antenna,
+            head=_rpy_to_pose(0, pitch_deg, 0),
+            antennas=[antenna_rad, -antenna_rad],
         )
         self._idle_phase += 0.04
 
@@ -251,37 +274,25 @@ class ReachyController:
         target = HEAD_ACTIONS.get(action)
         if target is None:
             return
+        roll_deg, pitch_deg, yaw_deg = target
+        pose = _rpy_to_pose(roll_deg, pitch_deg, yaw_deg)
         await asyncio.to_thread(
-            self._mini.goto_target,
-            x=target[0],
-            y=target[1],
-            z=target[2],
-            roll=target[3],
-            pitch=target[4],
-            yaw=target[5],
-            duration=0.5,
+            self._mini.goto_target, head=pose, duration=0.5,
         )
         await asyncio.sleep(0.6)
         await asyncio.to_thread(
-            self._mini.goto_target,
-            x=0,
-            y=0,
-            z=0,
-            roll=0,
-            pitch=0,
-            yaw=0,
-            duration=0.5,
+            self._mini.goto_target, head=np.eye(4), duration=0.5,
         )
 
     async def _wiggle_antennas(self):
         """Quick antenna wiggle gesture."""
         if self._mini is None:
             return
-        for angle in [30, -30, 20, -20, 0]:
+        for angle_deg in [30, -30, 20, -20, 0]:
+            rad = math.radians(angle_deg)
             await asyncio.to_thread(
                 self._mini.goto_target,
-                right_antenna=float(angle),
-                left_antenna=float(-angle),
+                antennas=[rad, -rad],
                 duration=0.15,
             )
             await asyncio.sleep(0.18)
@@ -306,24 +317,41 @@ async def create_agent(
     input_device: Optional[int] = None,
     output_device: Optional[int] = None,
     video_device: Optional[str] = None,
+    audio_input: Optional[AudioInput] = None,
+    audio_output: Optional[AudioOutput] = None,
+    robot_host: Optional[str] = None,
 ) -> tuple[Agent, ReachyController]:
     """Create the vision agent and Reachy controller."""
-    vlm = gemini.VLM(model="gemini-2.5-flash-preview-05-20")
+    vlm = gemini.VLM(model="gemini-2.5-flash")
 
-    input_sample_rate = get_device_sample_rate(input_device, is_input=True)
-    output_sample_rate = get_device_sample_rate(output_device, is_input=False)
+    if audio_input is not None and audio_output is not None:
+        logger.info("Using custom audio backends (robot audio)")
+        logger.info(
+            "Input: %dHz %dch, Output: %dHz %dch",
+            audio_input.sample_rate,
+            audio_input.channels,
+            audio_output.sample_rate,
+            audio_output.channels,
+        )
+        transport = LocalTransport(
+            audio_input=audio_input,
+            audio_output=audio_output,
+            video_device=video_device,
+        )
+    else:
+        input_sample_rate = get_device_sample_rate(input_device, is_input=True)
+        output_sample_rate = get_device_sample_rate(output_device, is_input=False)
+        logger.info("Input sample rate: %dHz", input_sample_rate)
+        logger.info("Output sample rate: %dHz", output_sample_rate)
+        transport = LocalTransport(
+            sample_rate=output_sample_rate,
+            input_device=input_device,
+            output_device=output_device,
+            video_device=video_device,
+        )
 
-    logger.info("Input sample rate: %dHz", input_sample_rate)
-    logger.info("Output sample rate: %dHz", output_sample_rate)
     if video_device:
         logger.info("Video device: %s", video_device)
-
-    transport = LocalTransport(
-        sample_rate=output_sample_rate,
-        input_device=input_device,
-        output_device=output_device,
-        video_device=video_device,
-    )
 
     tts = ActionStrippingTTS(cartesia.TTS(model_id="sonic-3"))
 
@@ -338,7 +366,7 @@ async def create_agent(
         streaming_tts=True,
     )
 
-    controller = ReachyController()
+    controller = ReachyController(host=robot_host)
     await controller.connect()
 
     @agent.subscribe
@@ -356,9 +384,14 @@ async def run_agent(
     input_device: Optional[int] = None,
     output_device: Optional[int] = None,
     video_device: Optional[str] = None,
+    audio_input: Optional[AudioInput] = None,
+    audio_output: Optional[AudioOutput] = None,
+    robot_host: Optional[str] = None,
 ):
     """Run the Reachy Mini vision agent."""
-    agent, controller = await create_agent(input_device, output_device, video_device)
+    agent, controller = await create_agent(
+        input_device, output_device, video_device, audio_input, audio_output, robot_host
+    )
 
     shutdown_event = asyncio.Event()
 
@@ -391,16 +424,69 @@ async def run_agent(
         logger.info("Reachy Mini agent stopped")
 
 
+def _create_robot_audio() -> tuple[AudioInput, AudioOutput]:
+    """Create Reachy Mini GStreamer audio backends."""
+    from reachy_mini.media.audio_gstreamer import GStreamerAudio
+
+    from reachy_audio import ReachyAudioInput, ReachyAudioOutput
+
+    gst = GStreamerAudio()
+    return ReachyAudioInput(gst), ReachyAudioOutput(gst)
+
+
 def main():
+    parser = argparse.ArgumentParser(description="Reachy Mini Vision Agent")
+    parser.add_argument(
+        "--robot-audio",
+        action="store_true",
+        help="Use the robot's onboard mic and speaker (GStreamer) instead of laptop audio",
+    )
+    parser.add_argument(
+        "--robot-host",
+        type=str,
+        default=None,
+        help="IP or hostname of the Reachy Mini daemon (e.g. 192.168.128.120)",
+    )
+    parser.add_argument(
+        "--default-audio",
+        action="store_true",
+        help="Use system default mic and speakers (skip interactive device selection)",
+    )
+    parser.add_argument(
+        "--no-video",
+        action="store_true",
+        help="Disable camera",
+    )
+    args = parser.parse_args()
+
     print("\n" + "=" * 60)
     print("  Reachy Mini Vision Agent")
     print("  Gemini VLM + Cartesia TTS + AssemblyAI STT")
     print("=" * 60)
-    print("\nThis agent uses your local microphone, speakers, and camera.")
-    print("The robot (if connected) will react during conversation.\n")
 
-    input_device, output_device = select_audio_devices()
-    video_device = select_video_device()
+    if args.robot_host:
+        print(f"\nConnecting to robot at {args.robot_host}")
+
+    audio_in: Optional[AudioInput] = None
+    audio_out: Optional[AudioOutput] = None
+    input_device: Optional[int] = None
+    output_device: Optional[int] = None
+
+    if args.robot_audio:
+        print("\nUsing Reachy Mini onboard mic and speaker (GStreamer).\n")
+        audio_in, audio_out = _create_robot_audio()
+    elif args.default_audio:
+        print("\nUsing system default mic and speakers.\n")
+    else:
+        print("\nThis agent uses your local microphone, speakers, and camera.")
+        print("The robot (if connected) will react during conversation.\n")
+        input_device, output_device = select_audio_devices()
+
+    video_device: Optional[str] = None
+    if args.no_video:
+        print("Camera disabled.")
+    else:
+        video_device = select_video_device()
 
     print("Speak into your microphone to interact with Reachy Mini.")
     if video_device:
@@ -408,7 +494,12 @@ def main():
     print("Press Ctrl+C to stop.\n")
 
     try:
-        asyncio.run(run_agent(input_device, output_device, video_device))
+        asyncio.run(
+            run_agent(
+                input_device, output_device, video_device,
+                audio_in, audio_out, args.robot_host,
+            )
+        )
     except KeyboardInterrupt:
         print("\nGoodbye!")
         sys.exit(0)
